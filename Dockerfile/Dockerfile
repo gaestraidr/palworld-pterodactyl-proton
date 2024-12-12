@@ -32,7 +32,7 @@ RUN apt-get update -y && \
 RUN dpkg --add-architecture i386 && \
     mkdir -pm755 /etc/apt/keyrings && \
     wget -O /etc/apt/keyrings/winehq-archive.key https://dl.winehq.org/wine-builds/winehq.key && \
-    wget -nc -P /etc/apt/sources.list.d/ https://dl.winehq.org/wine-builds/debian/dists/bullseye/winehq-bullseye.sources && \
+    wget -nc -P /etc/apt/sources.list.d/ https://dl.winehq.org/wine-builds/debian/dists/bookworm/winehq-bookworm.sources && \
     apt-get update -y && \
     apt-get install -y --install-recommends winehq-staging
 
@@ -55,7 +55,7 @@ ENV PROTON_LOG=1
 
 WORKDIR /home/container
 
-COPY entrypoint.sh /entrypoint.sh
+COPY --chown=1001 entrypoint.sh /entrypoint.sh
 
 RUN /usr/bin/chmod +x /entrypoint.sh
 
